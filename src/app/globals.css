@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Auth */
+.auth-method {
+  @apply m-5 rounded-3xl border border-threads-gray-light p-6 duration-150;
+}
