@@ -14,7 +14,7 @@ export default function Layout({ children }) {
         />
       </div>
 
-      <div className="z-10 flex-1 pt-[50vw] sm:pt-[19vw]">{children}</div>
+      <div className="z-10 flex-1">{children}</div>
 
       <Footer />
     </div>
