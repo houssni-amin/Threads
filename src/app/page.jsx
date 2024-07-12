@@ -1,3 +1,5 @@
+import ConnectedLayout from "@/components/ConnectedLayout/ConnectedLayout"
+
 export default function Index() {
-  return <div>Accueil</div>
+  return <ConnectedLayout />
 }
