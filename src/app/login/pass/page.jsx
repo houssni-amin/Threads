@@ -1,19 +1,36 @@
+"use client"
+
+import Button from "@/components/Button/Button"
+import { setCookie } from "cookies-next"
 import Image from "next/image"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 export default function Pass() {
+  const router = useRouter()
+
+  const onContinue = () => {
+    // Generate a new cookie
+    setCookie("guest", "true")
+
+    // redirect
+    router.push("/")
+  }
+
   return (
-    <div className="flex justify-center pt-48">
+    <div className="flex justify-center pt-48 sm:pt-72">
       <div className="flex max-w-[300px] flex-col gap-5">
         <h1 className="mb-5 text-xl font-bold text-white sm:mb-3">
           Utiliser Threads sans profil ?
         </h1>
+
         <div className="flex">
           <Image
             src="/pass.png"
             width={25}
             height={25}
             alt="not connected icon"
-            className="mr-2 h-[25px]"
+            className="mr-2 size-[25px]"
           />
           <div>
             <h2 className="text-base font-bold text-white">
@@ -23,16 +40,17 @@ export default function Pass() {
               Vous pourrez utiliser Threads sans profil pour naviguer sur
               l&apos;application, mais vous ne pourrez pas faire de
               publications, interagir avec du contenu, ni obtenir de
-              recommandations. En savoir plus
+              recommandations.
             </p>
           </div>
         </div>
+
         <div className="flex">
           <Image
             src="/oeil.png"
             width={25}
             height={25}
-            className="mr-2 h-[25px]"
+            className="mr-2 size-[25px]"
             alt="not connected icon"
           />
           <div>
@@ -41,17 +59,18 @@ export default function Pass() {
             </h2>
             <p className="text-xs text-threads-gray-light">
               Si vous voulez utiliser Threads avec un profil, vous pouvez vous
-              connecter avec un compte Instagram.
+              connecter avec votre adresse email.
             </p>
           </div>
         </div>
-        <div>
-          <button className="mb-3 mt-8 w-full rounded-2xl bg-white p-3 sm:mt-6">
+
+        <div className="mt-8 sm:mt-6">
+          <Button onClick={onContinue} className="mb-3 bg-white">
             Utiliser sans profil
-          </button>
-          <button className="w-full rounded-2xl border bg-threads-gray p-3 text-white">
-            Retour
-          </button>
+          </Button>
+          <Link href="/login">
+            <Button className="bg-threads-gray text-white">Retour</Button>
+          </Link>
         </div>
       </div>
     </div>
