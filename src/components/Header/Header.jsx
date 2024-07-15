@@ -54,7 +54,7 @@ export default function Header() {
           </svg>
         </Link>
       </nav>
-      <div className="fixed h-[80px] w-full backdrop-blur-3xl md:hidden"></div>
+      <div className="backdrop-blur-custom fixed h-[80px] w-full md:hidden"></div>
       <Button className="fixed end-0 z-10 mr-[5%] mt-6 flex h-10 min-w-[140px] max-w-[140px] items-center bg-white px-5 font-bold">
         Se connecter
       </Button>

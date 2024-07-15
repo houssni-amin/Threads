@@ -6,3 +6,8 @@
 .auth-method {
   @apply m-5 rounded-3xl border border-threads-gray-light p-6 duration-150;
 }
+
+.backdrop-blur-custom {
+  backdrop-filter: blur(90px);
+  -webkit-backdrop-filter: blur(90px); /* Préfixe pour Safari */
+}
