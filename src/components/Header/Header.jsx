@@ -55,7 +55,7 @@ export default function Header() {
         </Link>
       </nav>
       <div className="backdrop-blur-custom fixed h-[80px] w-full bg-threads-gray bg-opacity-60 md:hidden"></div>
-      <Button className="fixed end-0 z-10 mr-[5%] mt-6 flex h-10 min-w-[140px] max-w-[140px] items-center bg-white px-5 font-bold">
+      <Button className="fixed end-0 z-10 mr-[5%] mt-6 flex h-10 min-w-[150px] max-w-[150px] items-center justify-center bg-white px-5 font-bold">
         Se connecter
       </Button>
     </header>
