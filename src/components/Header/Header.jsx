@@ -1,32 +1,35 @@
 import Link from "next/link"
 import Button from "../Button/Button"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 
 export default function Header() {
+  const pathname = usePathname()
+  const iconColorHome = pathname === "/" ? "text-white" : "text-gray-600"
+  const iconColorsearch =
+    pathname === "/search" ? "text-white" : "text-gray-600"
+
   return (
-    <header>
-      <div className="fixed z-[999] flex h-16 w-full items-center justify-around backdrop-blur-3xl md:backdrop-blur-0">
+    <header className="flex justify-between">
+      <div className="fixed left-0 z-10 ml-[5%] mt-6 duration-150 hover:scale-110">
         <Link href="/">
           <Image
             src="/logo.png"
             alt="Logo Threads"
             width={41}
             height={45}
-            style={{ width: "40px", height: "auto" }}
+            style={{ width: "35px", height: "auto" }}
           />
         </Link>
-        <div>
-          <Button className="flex h-10 items-center bg-white px-5">
-            Se connecter
-          </Button>
-        </div>
       </div>
-
-      <nav className="pointer-events-none fixed bottom-0 flex h-16 w-full items-center justify-around backdrop-blur-3xl md:top-0 md:justify-center">
-        <Link href="/">
+      <nav className="bg-red fixed bottom-0 z-0 flex h-[88px] w-full justify-around backdrop-blur-[500px] md:top-0 md:justify-center">
+        <Link
+          href="/"
+          className="my-1 h-[80px] rounded-xl px-8 py-5 duration-150 hover:bg-[#404040] md:mr-[5%]"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="size-10 text-white md:mr-14"
+            className={`size-10 ${iconColorHome}`}
             viewBox="0 0 256 256"
           >
             <path
@@ -35,10 +38,13 @@ export default function Header() {
             ></path>
           </svg>
         </Link>
-        <Link href="/search">
+        <Link
+          href="/search"
+          className="my-1 h-[80px] rounded-xl px-8 py-5 duration-150 hover:bg-[#404040] md:ml-[5%]"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="size-10 text-white md:ml-14"
+            className={`size-10 ${iconColorsearch}`}
             viewBox="0 0 256 256"
           >
             <path
@@ -48,6 +54,10 @@ export default function Header() {
           </svg>
         </Link>
       </nav>
+      <div className="fixed h-[80px] w-full backdrop-blur-[400px] md:hidden"></div>
+      <Button className="fixed end-0 z-10 mr-[5%] mt-6 flex h-10 w-[140px] items-center bg-white px-5 font-bold">
+        Se connecter
+      </Button>
     </header>
   )
 }
