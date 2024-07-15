@@ -237,7 +237,7 @@ export default function ConnectedLayout({ children }) {
         </p>
       </div>
 
-      <Footer />
+      <Footer mb="mb-[88px]" />
     </section>
   )
 }
