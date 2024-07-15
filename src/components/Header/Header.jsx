@@ -22,7 +22,7 @@ export default function Header() {
           />
         </Link>
       </div>
-      <nav className="bg-red fixed bottom-0 z-0 flex h-[88px] w-full justify-around backdrop-blur-3xl md:top-0 md:justify-center">
+      <nav className="bg-red backdrop-blur-custom fixed bottom-0 z-0 flex h-[88px] w-full justify-around bg-threads-gray bg-opacity-60 md:top-0 md:justify-center">
         <Link
           href="/"
           className="my-1 h-[80px] rounded-xl px-8 py-5 duration-150 hover:bg-[#404040] md:mr-[5%]"
@@ -54,7 +54,7 @@ export default function Header() {
           </svg>
         </Link>
       </nav>
-      <div className="backdrop-blur-custom fixed h-[80px] w-full md:hidden"></div>
+      <div className="backdrop-blur-custom fixed h-[80px] w-full bg-threads-gray bg-opacity-60 md:hidden"></div>
       <Button className="fixed end-0 z-10 mr-[5%] mt-6 flex h-10 min-w-[140px] max-w-[140px] items-center bg-white px-5 font-bold">
         Se connecter
       </Button>

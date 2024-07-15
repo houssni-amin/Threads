@@ -8,6 +8,6 @@
 }
 
 .backdrop-blur-custom {
-  backdrop-filter: blur(90px);
-  -webkit-backdrop-filter: blur(90px); /* Préfixe pour Safari */
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px); /* Préfixe pour Safari */
 }
