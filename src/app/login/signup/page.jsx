@@ -2,7 +2,7 @@ import Link from "next/link"
 
 export default function Signup() {
   return (
-    <div className="mx-auto p-5 pt-[150px] text-white md:max-w-[500px] md:px-0 md:pt-[285px]">
+    <div className="mx-auto p-5 pt-[150px] text-white md:max-w-[500px] md:px-0 md:pt-[270px]">
       <div className="mb-4 flex">
         <Link href="/login">
           <svg
