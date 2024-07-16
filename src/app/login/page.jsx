@@ -2,8 +2,8 @@ import Link from "next/link"
 
 export default function Login() {
   return (
-    <div className="flex flex-col pt-56">
-      <h1 className="text-center font-bold text-white sm:text-xl">
+    <div className="flex flex-col pt-[230px] md:pt-[300px]">
+      <h1 className="text-center font-bold text-white md:text-xl">
         Comment souhaitez-vous utilisez Threads ?
       </h1>
 
