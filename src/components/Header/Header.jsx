@@ -5,13 +5,10 @@ import { usePathname } from "next/navigation"
 
 export default function Header() {
   const pathname = usePathname()
-  const iconColorHome = pathname === "/" ? "text-white" : "text-gray-600"
-  const iconColorsearch =
-    pathname === "/search" ? "text-white" : "text-gray-600"
 
   return (
     <header className="flex justify-between">
-      <div className="fixed left-0 z-10 ml-[5%] mt-6 duration-150 hover:scale-110">
+      <div className="fixed left-0 z-10 ml-[10%] mt-6 duration-150 hover:scale-110">
         <Link href="/">
           <Image
             src="/logo.png"
@@ -25,11 +22,11 @@ export default function Header() {
       <nav className="bg-red backdrop-blur-custom fixed bottom-0 z-0 flex h-[88px] w-full justify-around bg-threads-gray bg-opacity-60 md:top-0 md:justify-center">
         <Link
           href="/"
-          className="my-1 h-[80px] rounded-xl px-8 py-5 duration-150 hover:bg-[#404040] md:mr-[5%]"
+          className="my-1 h-[80px] rounded-xl px-8 py-5 duration-150 hover:bg-threads-gray-dark md:mr-[5%]"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={`size-10 ${iconColorHome}`}
+            className={`size-10 ${pathname === "/" ? "text-white" : "text-threads-gray-light"}`}
             viewBox="0 0 256 256"
           >
             <path
@@ -40,11 +37,11 @@ export default function Header() {
         </Link>
         <Link
           href="/search"
-          className="my-1 h-[80px] rounded-xl px-8 py-5 duration-150 hover:bg-[#404040] md:ml-[5%]"
+          className="my-1 h-[80px] rounded-xl px-8 py-5 duration-150 hover:bg-threads-gray-dark md:ml-[5%]"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={`size-10 ${iconColorsearch}`}
+            className={`size-10 ${pathname === "/search" ? "text-white" : "text-threads-gray-light"}`}
             viewBox="0 0 256 256"
           >
             <path
@@ -55,7 +52,7 @@ export default function Header() {
         </Link>
       </nav>
       <div className="backdrop-blur-custom fixed h-[80px] w-full bg-threads-gray bg-opacity-60 md:hidden"></div>
-      <Button className="fixed end-0 z-10 mr-[5%] mt-6 flex h-10 min-w-[150px] max-w-[150px] items-center justify-center bg-white px-5 font-bold">
+      <Button className="fixed end-0 z-10 mr-[10%] mt-6 flex h-10 min-w-[150px] max-w-[150px] items-center justify-center bg-white px-5 font-semibold">
         Se connecter
       </Button>
     </header>
