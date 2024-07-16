@@ -7,6 +7,12 @@
   @apply m-5 rounded-3xl border border-threads-gray-light p-6 duration-150;
 }
 
+/* Post */
+.post {
+  @apply mx-auto flex border-b border-threads-gray-light p-5 md:max-w-[700px] md:px-0;
+}
+
+/* for the Header */
 .backdrop-blur-custom {
   backdrop-filter: blur(100px);
   -webkit-backdrop-filter: blur(100px); /* Préfixe pour Safari */
