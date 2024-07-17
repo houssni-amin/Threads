@@ -3,7 +3,7 @@ import ConnectedLayout from "@/components/ConnectedLayout/ConnectedLayout"
 export default function Search() {
   return (
     <ConnectedLayout>
-      <div className="relative mx-auto h-24 w-full p-5 md:max-w-[700px] md:px-0">
+      <div className="relative mx-auto h-24 w-full max-w-[500px] p-5 md:px-0">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="absolute left-10 top-[34px] size-7 text-threads-gray-light"
