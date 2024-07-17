@@ -5,6 +5,7 @@ import Link from "next/link"
 import { toast } from "react-toastify"
 import { createUser } from "@/actions/create-user"
 import { useRouter } from "next/navigation"
+import { useFormStatus } from "react-dom"
 
 export default function Signup() {
   const router = useRouter()
@@ -34,6 +35,9 @@ export default function Signup() {
     //Redirect
     router.push("/login/signin")
   }
+
+  // This disables the "Sign up" button during form processing.
+  const { pending } = useFormStatus()
 
   return (
     <div className="mx-auto max-w-[500px] p-5 pt-[150px] text-white md:px-0 md:pt-[270px]">
@@ -83,7 +87,10 @@ export default function Signup() {
           className="info"
           required
         />
-        <button className="w-full rounded-3xl bg-white py-4 text-black">
+        <button
+          disabled={pending}
+          className="w-full rounded-3xl bg-white py-4 text-black disabled:cursor-not-allowed disabled:bg-opacity-50"
+        >
           S&apos;inscrire
         </button>
       </form>
