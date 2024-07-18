@@ -1,14 +1,49 @@
 "use client"
 
+import { checkEmailSyntax } from "@/utlis/checkEmailSyntax"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useFormStatus } from "react-dom"
+import { toast } from "react-toastify"
+import { signIn } from "next-auth/react"
 
 export default function Signin() {
+  const router = useRouter()
+
   const prepareLogin = async (FormData) => {
     const email = FormData.get("email")
     const password = FormData.get("password")
 
-    console.log(email, password)
+    if (!email || !password) {
+      return toast.error("Veuillez remplir tous les champs.")
+    }
+
+    if (!checkEmailSyntax(email)) {
+      return toast.error("Veuillez entrer un email valide.")
+    }
+
+    try {
+      const response = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      })
+
+      if (response.error) {
+        return toast.error(response.error)
+      }
+    } catch (error) {
+      return toast.error(error.message)
+    }
+
+    toast.success("Connexion réussie !")
+
+    //Redirect
+    router.replace("/")
   }
+
+  // This disables the "Sign in" button during form processing.
+  const { pending } = useFormStatus()
 
   return (
     <div className="mx-auto max-w-[500px] p-5 pt-[200px] text-white md:px-0 md:pt-[300px]">
@@ -29,7 +64,7 @@ export default function Signin() {
         </Link>
         <p className="text-2xl font-bold">Connectez-vous</p>
       </div>
-      <form action={prepareLogin}>
+      <form action={prepareLogin} noValidate>
         <input
           type="email"
           name="email"
@@ -44,7 +79,11 @@ export default function Signin() {
           className="info"
           required
         />
-        <button className="w-full rounded-3xl bg-white py-4 text-black">
+
+        <button
+          disabled={pending}
+          className="w-full rounded-3xl bg-white py-4 text-black disabled:cursor-not-allowed disabled:bg-opacity-50"
+        >
           Se connecter
         </button>
       </form>
