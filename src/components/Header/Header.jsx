@@ -2,9 +2,14 @@ import Link from "next/link"
 import Button from "../Button/Button"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
+import { signOut, useSession } from "next-auth/react"
 
 export default function Header() {
+  // Retrieves the current URL path
   const pathname = usePathname()
+
+  // Gets the user session data
+  const { data: session } = useSession()
 
   return (
     <header className="flex justify-between">
@@ -52,11 +57,22 @@ export default function Header() {
         </Link>
       </nav>
       <div className="backdrop-blur-custom fixed h-[80px] w-full bg-threads-gray bg-opacity-60 md:hidden"></div>
-      <Link href="/login">
-        <Button className="fixed end-0 z-10 mr-[10%] mt-6 flex h-10 min-w-[150px] max-w-[150px] items-center justify-center bg-white px-5 font-semibold">
-          Se connecter
+
+      {/* Checks if the user is logged in by verifying the presence of an email in the session */}
+      {session?.user?.email ? (
+        <Button
+          onClick={() => signOut()}
+          className="fixed end-0 z-10 mr-[10%] mt-6 flex h-10 min-w-[160px] max-w-[160px] items-center justify-center bg-white px-5 font-semibold"
+        >
+          Se deconnecter
         </Button>
-      </Link>
+      ) : (
+        <Link href="/login">
+          <Button className="fixed end-0 z-10 mr-[10%] mt-6 flex h-10 min-w-[150px] max-w-[150px] items-center justify-center bg-white px-5 font-semibold">
+            Se connecter
+          </Button>
+        </Link>
+      )}
     </header>
   )
 }
