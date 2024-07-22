@@ -1,7 +1,12 @@
 import ConnectedLayout from "@/components/ConnectedLayout/ConnectedLayout"
 import Post from "@/components/Post/Post"
+import { getServerSession } from "next-auth"
+import { authOptions } from "./api/auth/[...nextauth]/route"
+import NewPostForm from "@/components/NewPostForm/NewPostForm"
 
-export default function Index() {
+export default async function Index() {
+  const session = await getServerSession(authOptions)
+
   const posts = [
     {
       _id: "1",
@@ -38,6 +43,12 @@ export default function Index() {
   return (
     <ConnectedLayout>
       {/* New posts */}
+      {session?.user && (
+        <div>
+          <NewPostForm />
+        </div>
+      )}
+
       {/* Posts */}
       {posts.map((post) => (
         <div key={post._id}>
