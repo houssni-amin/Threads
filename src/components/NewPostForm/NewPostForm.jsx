@@ -27,13 +27,13 @@ export default function NewPostForm() {
           <textarea
             placeholder="Commencer un thread..."
             id="content"
-            className="h-full w-full rounded-s-xl border border-threads-gray-light bg-threads-gray p-1 text-white outline-none placeholder:ml-[10%] placeholder:text-threads-gray-light"
+            className="h-full min-h-14 w-full rounded-s-xl bg-threads-gray-dark p-2 text-white outline-none placeholder:ml-[10%] placeholder:text-threads-gray-light"
             value={textarea}
             onChange={(e) => setTextarea(e.target.value)}
           ></textarea>
 
           <button
-            className="size-full w-20 rounded-e-xl border border-threads-gray-light bg-threads-gray font-semibold text-white disabled:opacity-50"
+            className="size-full w-20 rounded-e-xl bg-threads-gray-dark font-semibold text-white disabled:opacity-50"
             disabled={textarea === ""}
           >
             Publier
