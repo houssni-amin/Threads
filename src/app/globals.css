@@ -19,7 +19,7 @@
 }
 
 .newPostFormTxt {
-  @apply h-full min-h-14 w-full rounded-s-xl bg-threads-gray-dark p-2 text-white outline-none placeholder:ml-[10%] placeholder:text-threads-gray-light;
+  @apply h-full min-h-24 w-full rounded-s-xl bg-threads-gray-dark p-2 text-white outline-none placeholder:ml-[10%] placeholder:text-threads-gray-light;
 }
 
 .newPostFormBtn {
