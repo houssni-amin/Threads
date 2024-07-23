@@ -22,7 +22,7 @@ export default function Header({ openModale, setOpenModale }) {
 
   return (
     <header className="flex justify-between">
-      <div className="fixed left-0 z-10 ml-[10%] mt-6 duration-150 hover:scale-110">
+      <div className="fixed left-0 z-10 ml-[10%] mt-[10px] duration-150 hover:scale-110 lg:mt-6">
         <Link href="/">
           <Image
             src="/logo.png"
@@ -34,15 +34,15 @@ export default function Header({ openModale, setOpenModale }) {
         </Link>
       </div>
 
-      <nav className="bg-red backdrop-blur-custom fixed bottom-0 z-0 flex h-[88px] w-full justify-around bg-threads-gray bg-opacity-60 md:top-0 md:justify-center">
+      <nav className="backdrop-blur-custom fixed bottom-0 z-0 flex h-[60px] w-full justify-around bg-threads-gray bg-opacity-60 lg:top-0 lg:h-[88px] lg:justify-center">
         {/* Index */}
         <Link
           href="/"
-          className="my-1 h-[80px] rounded-xl px-8 py-5 duration-150 hover:bg-threads-gray-dark md:mx-[1%]"
+          className="my-[2px] flex h-14 items-center rounded-xl px-6 py-0 duration-150 hover:bg-threads-gray-dark lg:mx-[1%] lg:my-1 lg:h-20 lg:px-8 lg:py-5"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={`size-10 ${pathname === "/" ? "text-white" : "text-threads-gray-light"}`}
+            className={`size-7 lg:size-10 ${pathname === "/" ? "text-white" : "text-threads-gray-light"}`}
             viewBox="0 0 256 256"
           >
             <path
@@ -55,11 +55,11 @@ export default function Header({ openModale, setOpenModale }) {
         {/* Search */}
         <Link
           href="/search"
-          className="my-1 h-[80px] rounded-xl px-8 py-5 duration-150 hover:bg-threads-gray-dark md:mx-[1%]"
+          className="my-[2px] flex h-14 items-center rounded-xl px-6 py-0 duration-150 hover:bg-threads-gray-dark lg:mx-[1%] lg:h-20 lg:px-8 lg:py-5"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={`size-10 ${pathname === "/search" ? "text-white" : "text-threads-gray-light"}`}
+            className={`size-7 lg:size-10 ${pathname === "/search" ? "text-white" : "text-threads-gray-light"}`}
             viewBox="0 0 256 256"
           >
             <path
@@ -72,10 +72,10 @@ export default function Header({ openModale, setOpenModale }) {
         {/* Create */}
         {/* Checks if the user is logged in by verifying the presence of an email in the session */}
         {session?.user?.email && (
-          <div className="my-1 h-[80px] cursor-pointer rounded-xl px-8 py-5 duration-150 hover:bg-threads-gray-dark md:mx-[1%]">
+          <div className="my-[2px] flex h-14 cursor-pointer items-center rounded-xl px-6 py-0 duration-150 hover:bg-threads-gray-dark lg:mx-[1%] lg:h-20 lg:px-8 lg:py-5">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="size-10 text-threads-gray-light"
+              className="size-7 text-threads-gray-light lg:size-10"
               viewBox="0 0 256 256"
               onClick={() => setOpenModale(true)}
             >
@@ -92,11 +92,11 @@ export default function Header({ openModale, setOpenModale }) {
         {session?.user?.email && (
           <Link
             href={`/@${session.user.pseudo}`}
-            className="my-1 h-[80px] rounded-xl px-8 py-5 duration-150 hover:bg-threads-gray-dark md:mx-[1%]"
+            className="my-[2px] flex h-14 items-center rounded-xl px-6 py-0 duration-150 hover:bg-threads-gray-dark lg:mx-[1%] lg:h-20 lg:px-8 lg:py-5"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className={`size-10 ${pathname.includes("@") ? "text-white" : "text-threads-gray-light"}`}
+              className={`size-7 lg:size-10 ${pathname.includes("@") ? "text-white" : "text-threads-gray-light"}`}
               viewBox="0 0 256 256"
             >
               <path
@@ -107,19 +107,19 @@ export default function Header({ openModale, setOpenModale }) {
           </Link>
         )}
       </nav>
-      <div className="backdrop-blur-custom fixed h-[80px] w-full bg-threads-gray bg-opacity-60 md:hidden"></div>
+      <div className="backdrop-blur-custom fixed h-[60px] w-full bg-threads-gray bg-opacity-60 lg:hidden"></div>
 
       {/* Checks if the user is logged in by verifying the presence of an email in the session */}
       {session?.user?.email ? (
         <Button
           onClick={() => signOut()}
-          className="fixed end-0 z-10 mr-[10%] mt-6 flex h-10 min-w-[160px] max-w-[160px] items-center justify-center bg-white px-5 font-semibold"
+          className="fixed end-0 z-10 mr-[10%] mt-[10px] flex h-10 min-w-[160px] max-w-[160px] items-center justify-center bg-white px-5 font-semibold lg:mt-6"
         >
           Se deconnecter
         </Button>
       ) : (
         <Link href="/login">
-          <Button className="fixed end-0 z-10 mr-[10%] mt-6 flex h-10 min-w-[150px] max-w-[150px] items-center justify-center bg-white px-5 font-semibold">
+          <Button className="fixed end-0 z-10 mr-[10%] mt-[10px] flex h-10 min-w-[150px] max-w-[150px] items-center justify-center bg-white px-5 font-semibold lg:mt-6">
             Se connecter
           </Button>
         </Link>
