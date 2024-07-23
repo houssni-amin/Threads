@@ -1,8 +1,10 @@
 "use client"
 
+import { createPost } from "@/actions/create-post"
 import { useSession } from "next-auth/react"
 import Image from "next/image"
 import { useState } from "react"
+import { toast } from "react-toastify"
 
 export default function NewPostForm() {
   const { data: session } = useSession()
@@ -11,8 +13,20 @@ export default function NewPostForm() {
 
   const [textarea, setTextarea] = useState("")
 
+  const onPrepare = async (formData) => {
+    try {
+      await createPost(formData)
+      setTextarea("")
+    } catch (error) {
+      return toast.error(error.message)
+    }
+  }
+
   return (
-    <form className="mx-auto flex border-b border-threads-gray-light p-5 md:max-w-[700px] md:px-0">
+    <form
+      action={onPrepare}
+      className="mx-auto flex border-b border-threads-gray-light p-5 md:max-w-[700px] md:px-0"
+    >
       <div className="flex size-full">
         <div className="mr-5 max-h-[50px] min-h-[50px] min-w-[50px] max-w-[50px]">
           <Image
@@ -27,15 +41,13 @@ export default function NewPostForm() {
           <textarea
             placeholder="Commencer un thread..."
             id="content"
-            className="h-full min-h-14 w-full rounded-s-xl bg-threads-gray-dark p-2 text-white outline-none placeholder:ml-[10%] placeholder:text-threads-gray-light"
+            className="newPostFormTxt"
             value={textarea}
+            name="content"
             onChange={(e) => setTextarea(e.target.value)}
           ></textarea>
 
-          <button
-            className="size-full w-20 rounded-e-xl bg-threads-gray-dark font-semibold text-white disabled:opacity-50"
-            disabled={textarea === ""}
-          >
+          <button className="newPostFormBtn" disabled={textarea === ""}>
             Publier
           </button>
         </div>
