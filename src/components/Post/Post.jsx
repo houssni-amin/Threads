@@ -1,5 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
+import moment from "moment-timezone"
+import "moment/locale/fr"
 
 export default function Post({ post }) {
   return (
@@ -23,7 +25,12 @@ export default function Post({ post }) {
           <Link href={`/@${post.pseudo}`} className="font-bold">
             {post.pseudo}
           </Link>
-          <div className="text-threads-gray-light">22 h</div>
+          <div className="text-threads-gray-light">
+            {moment
+              .utc(post.creation, "YYYY-MM-DD HH:mm:ss")
+              .tz("Europe/Paris")
+              .fromNow()}
+          </div>
         </div>
 
         {post.content}
