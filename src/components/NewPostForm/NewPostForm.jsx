@@ -6,7 +6,7 @@ import Image from "next/image"
 import { useState } from "react"
 import { toast } from "react-toastify"
 
-export default function NewPostForm() {
+export default function NewPostForm({ closeModale = () => {} }) {
   const { data: session } = useSession()
 
   const profilImage = session?.user.profile || "/picture.png"
@@ -20,6 +20,7 @@ export default function NewPostForm() {
     } catch (error) {
       return toast.error(error.message)
     }
+    closeModale()
   }
 
   return (

@@ -3,13 +3,22 @@ import Button from "../Button/Button"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { signOut, useSession } from "next-auth/react"
+import { useEffect, useState } from "react"
 
-export default function Header() {
+export default function Header({ openModale, setOpenModale }) {
   // Retrieves the current URL path
   const pathname = usePathname()
 
   // Gets the user session data
   const { data: session } = useSession()
+
+  useEffect(() => {
+    if (openModale) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "unset"
+    }
+  }, [openModale])
 
   return (
     <header className="flex justify-between">
@@ -26,9 +35,10 @@ export default function Header() {
       </div>
 
       <nav className="bg-red backdrop-blur-custom fixed bottom-0 z-0 flex h-[88px] w-full justify-around bg-threads-gray bg-opacity-60 md:top-0 md:justify-center">
+        {/* Index */}
         <Link
           href="/"
-          className="my-1 h-[80px] rounded-xl px-8 py-5 duration-150 hover:bg-threads-gray-dark md:mr-[5%]"
+          className="my-1 h-[80px] rounded-xl px-8 py-5 duration-150 hover:bg-threads-gray-dark md:mx-[1%]"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -42,9 +52,10 @@ export default function Header() {
           </svg>
         </Link>
 
+        {/* Search */}
         <Link
           href="/search"
-          className="my-1 h-[80px] rounded-xl px-8 py-5 duration-150 hover:bg-threads-gray-dark"
+          className="my-1 h-[80px] rounded-xl px-8 py-5 duration-150 hover:bg-threads-gray-dark md:mx-[1%]"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -58,10 +69,30 @@ export default function Header() {
           </svg>
         </Link>
 
+        {/* Create */}
+        {/* Checks if the user is logged in by verifying the presence of an email in the session */}
+        {session?.user?.email && (
+          <div className="my-1 h-[80px] cursor-pointer rounded-xl px-8 py-5 duration-150 hover:bg-threads-gray-dark md:mx-[1%]">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="size-10 text-threads-gray-light"
+              viewBox="0 0 256 256"
+              onClick={() => setOpenModale(true)}
+            >
+              <path
+                fill="currentColor"
+                d="m232.49 55.51l-32-32a12 12 0 0 0-17 0l-96 96A12 12 0 0 0 84 128v32a12 12 0 0 0 12 12h32a12 12 0 0 0 8.49-3.51l96-96a12 12 0 0 0 0-16.98M192 49l15 15l-11 11l-15-15Zm-69 99h-15v-15l56-56l15 15Zm105-7.43V208a20 20 0 0 1-20 20H48a20 20 0 0 1-20-20V48a20 20 0 0 1 20-20h67.43a12 12 0 0 1 0 24H52v152h152v-63.43a12 12 0 0 1 24 0"
+              ></path>
+            </svg>
+          </div>
+        )}
+
+        {/* User */}
+        {/* Checks if the user is logged in by verifying the presence of an email in the session */}
         {session?.user?.email && (
           <Link
             href={`/@${session.user.pseudo}`}
-            className="my-1 h-[80px] rounded-xl px-8 py-5 duration-150 hover:bg-threads-gray-dark md:ml-[5%]"
+            className="my-1 h-[80px] rounded-xl px-8 py-5 duration-150 hover:bg-threads-gray-dark md:mx-[1%]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
