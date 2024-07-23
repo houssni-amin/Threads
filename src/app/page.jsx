@@ -3,51 +3,37 @@ import Post from "@/components/Post/Post"
 import { getServerSession } from "next-auth"
 import { authOptions } from "./api/auth/[...nextauth]/route"
 import NewPostForm from "@/components/NewPostForm/NewPostForm"
+import { MongoClient } from "mongodb"
 
 export default async function Index() {
   const session = await getServerSession(authOptions)
 
-  const posts = [
-    {
-      _id: "1",
-      content: "First thread !",
-      pseudo: "Houssni_Amin",
-      profile: "/picture.png",
-    },
-    {
-      _id: "2",
-      content:
-        "Lorem ipsum dolor acere, neque iste! Quis, obcaecati. Impedit ipsam dolorum incidunt delectus cupiditate accusamus autem voluptas doloremque quia velit reprehenderit distinctio, architecto officiis accusantium rem eaque odit cumque nihil, optio veniam neque dolorem, necessitatibus hic? Fuga consectetur labore minima quibusdam iste dolorem voluptatum.",
-      pseudo: "Emily_Brown",
-      profile: "/picture.png",
-    },
-    {
-      _id: "3",
-      content: "Just finished a great workout at the gym 💪",
-      pseudo: "John_Doe",
-      profile: "/picture.png",
-    },
-    {
-      _id: "4",
-      content: "Excited to announce my new project launch 🚀",
-      pseudo: "Jane_Smith",
-      profile: "/picture.png",
-    },
-    {
-      _id: "5",
-      content: "Enjoying a relaxing evening with a good book 📖",
-      pseudo: "Mark_Johnson",
-      profile: "/picture.png",
-    },
-  ]
+  let posts
+  let client
+  try {
+    // Connete to the MongoDb cluster
+    client = await MongoClient.connect(process.env.MONGODB_CLIENT)
+
+    // Connect to the MongoDB database
+    const db = client.db(process.env.MONGODB_DATABASE)
+
+    // Select the "posts" collection
+    posts = await db.collection("posts").find().sort({ creation: -1 }).toArray()
+
+    posts = posts.map((post) => ({
+      ...post,
+      _id: post._id.toString(),
+    }))
+  } catch (error) {
+    throw new Error(error.message)
+  }
+
+  await client.close()
+
   return (
     <ConnectedLayout>
       {/* New posts */}
-      {session?.user && (
-        <div>
-          <NewPostForm />
-        </div>
-      )}
+      {session?.user && <NewPostForm />}
 
       {/* Posts */}
       {posts.map((post) => (
