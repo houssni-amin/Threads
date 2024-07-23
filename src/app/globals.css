@@ -18,6 +18,14 @@
   @apply mb-4 h-full w-full rounded-xl bg-threads-gray-dark py-5 pl-6 text-white placeholder-threads-gray-light outline-none;
 }
 
+.newPostFormTxt {
+  @apply h-full min-h-14 w-full rounded-s-xl bg-threads-gray-dark p-2 text-white outline-none placeholder:ml-[10%] placeholder:text-threads-gray-light;
+}
+
+.newPostFormBtn {
+  @apply size-full w-20 rounded-e-xl bg-threads-gray-dark font-semibold text-white disabled:opacity-50;
+}
+
 /* for the Header */
 .backdrop-blur-custom {
   backdrop-filter: blur(100px);
