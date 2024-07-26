@@ -10,6 +10,14 @@
   @apply mx-auto flex border-b border-threads-gray-light p-5 md:max-w-[700px] md:px-0;
 }
 
+.options {
+  @apply absolute right-0 top-7 z-10 rounded-xl border border-threads-gray-light bg-threads-gray p-2;
+}
+
+.option {
+  @apply cursor-pointer rounded-lg px-3 py-1 text-white hover:bg-threads-gray-dark;
+}
+
 .search {
   @apply h-full w-full rounded-xl border border-threads-gray-light bg-black py-3 pl-16 text-white placeholder-threads-gray-light outline-none md:pl-24;
 }
