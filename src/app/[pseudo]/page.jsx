@@ -1,7 +1,7 @@
 "use client"
 
 import ConnectedLayout from "@/components/ConnectedLayout/ConnectedLayout"
-import { notFound, useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import Image from "next/image"
 import Post from "@/components/Post/Post"
 import { useEffect, useState } from "react"
@@ -10,16 +10,17 @@ import { toast } from "react-toastify"
 export default function Profil() {
   const params = useParams()
   const pseudo = params.pseudo.slice(3)
+  const router = useRouter()
 
   const [user, setUser] = useState([])
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
     if (!pseudo) {
-      notFound()
+      router.push("/")
     }
     fetchUserDataPosts()
-  })
+  }, [])
 
   const fetchUserDataPosts = async () => {
     const response = await fetch("api/user", {
@@ -34,6 +35,11 @@ export default function Profil() {
 
     if (!response.ok) {
       toast.error("Une erreur est survenue")
+    }
+
+    if (!data.user) {
+      router.push("/")
+      return
     }
 
     setUser(data.user)
