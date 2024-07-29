@@ -22,9 +22,10 @@ export default function Header({ openModale, setOpenModale }) {
 
   return (
     <header className="flex justify-between">
-      <div className="fixed left-0 z-10 ml-[10%] mt-[10px] duration-150 hover:scale-110 lg:mt-6">
+      <div className="fixed left-0 z-20 ml-[10%] mt-[10px] duration-150 hover:scale-110 lg:mt-6">
         <Link href="/">
           <Image
+            className="z-20"
             src="/logo.png"
             alt="Logo Threads"
             width={41}
@@ -34,7 +35,7 @@ export default function Header({ openModale, setOpenModale }) {
         </Link>
       </div>
 
-      <nav className="backdrop-blur-custom fixed bottom-0 z-0 flex h-[60px] w-full justify-around bg-threads-gray bg-opacity-60 lg:top-0 lg:h-[88px] lg:justify-center">
+      <nav className="backdrop-blur-custom fixed bottom-0 z-10 flex h-[60px] w-full justify-around bg-threads-gray bg-opacity-60 lg:top-0 lg:h-[88px] lg:justify-center">
         {/* Index */}
         <Link
           href="/"
@@ -107,7 +108,7 @@ export default function Header({ openModale, setOpenModale }) {
           </Link>
         )}
       </nav>
-      <div className="backdrop-blur-custom fixed h-[60px] w-full bg-threads-gray bg-opacity-60 lg:hidden"></div>
+      <div className="backdrop-blur-custom fixed z-10 h-[60px] w-full bg-threads-gray bg-opacity-60 lg:hidden"></div>
 
       {/* Checks if the user is logged in by verifying the presence of an email in the session */}
       {session?.user?.email ? (
@@ -118,7 +119,7 @@ export default function Header({ openModale, setOpenModale }) {
           Se deconnecter
         </Button>
       ) : (
-        <Link href="/login">
+        <Link href="/login/signin">
           <Button className="fixed end-0 z-10 mr-[10%] mt-[10px] flex h-10 min-w-[150px] max-w-[150px] items-center justify-center bg-white px-5 font-semibold lg:mt-6">
             Se connecter
           </Button>

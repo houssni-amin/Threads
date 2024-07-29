@@ -47,7 +47,7 @@ export default function Post({ post }) {
           <Link href={`/@${post.pseudo}`} className="font-bold">
             {post.pseudo}
           </Link>
-          <div className="relative flex w-full items-center justify-between text-threads-gray-light">
+          <div className="relative z-0 flex w-full items-center justify-between text-threads-gray-light">
             <div>
               {moment
                 .utc(post.creation, "YYYY-MM-DD HH:mm:ss")
