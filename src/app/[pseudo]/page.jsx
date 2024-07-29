@@ -6,14 +6,22 @@ import Image from "next/image"
 import Post from "@/components/Post/Post"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
+import { useSession } from "next-auth/react"
+import { createPortal } from "react-dom"
 
 export default function Profil() {
   const params = useParams()
   const pseudo = params.pseudo.slice(3)
   const router = useRouter()
+  const { data: session } = useSession()
 
   const [user, setUser] = useState([])
   const [posts, setPosts] = useState([])
+  const [openModale, setOpenModale] = useState(false)
+  const [profileInput, setProfileInput] = useState("")
+  const [bioInput, setBioInput] = useState("")
+  const [linkInput, setLinkInput] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     if (!pseudo) {
@@ -21,6 +29,14 @@ export default function Profil() {
     }
     fetchUserDataPosts()
   }, [])
+
+  useEffect(() => {
+    if (openModale) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "unset"
+    }
+  }, [openModale])
 
   const fetchUserDataPosts = async () => {
     const response = await fetch("api/user", {
@@ -46,10 +62,99 @@ export default function Profil() {
     setPosts(data.posts)
   }
 
+  const edit = () => {
+    setProfileInput(user.profile)
+    setBioInput(user.bio)
+    setLinkInput(user.url)
+
+    setOpenModale(true)
+  }
+
+  const editUser = async () => {}
+
   const profilImage = user.profile || "/picture.png"
 
   return (
     <ConnectedLayout>
+      {openModale &&
+        createPortal(
+          <div
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setOpenModale(false)
+              }
+            }}
+            className="modale-background"
+          >
+            <div className="modale-foreground">
+              {/* Picture */}
+              <div className="flex items-center gap-3 border-b border-threads-gray-light pb-5">
+                <div className="flex flex-1 flex-col text-white">
+                  <label className="font-bold" htmlFor="picture">
+                    Photo de profil
+                  </label>
+                  <input
+                    type="url"
+                    name="picture"
+                    id="picture"
+                    className="rounded-lg border border-threads-gray-light bg-threads-gray-dark p-1 placeholder:text-threads-gray-light"
+                    placeholder="+ Ajouter une photo de profil"
+                    value={profileInput}
+                    onChange={(e) => setProfileInput(e.target.value)}
+                  />
+                </div>
+                <Image
+                  src={user.profile}
+                  alt="User"
+                  width={80}
+                  height={80}
+                  className="rounded-full object-cover"
+                />
+              </div>
+
+              {/* Bio */}
+              <div className="mt-5 flex flex-col border-b border-threads-gray-light pb-5 text-white">
+                <label className="mb-1 font-bold" htmlFor="bio">
+                  Bio
+                </label>
+                <textarea
+                  name="bio"
+                  id="bio"
+                  placeholder="+ Ecrivez une bio"
+                  value={bioInput}
+                  onChange={(e) => setBioInput(e.target.value)}
+                  className="h-9 max-h-72 min-h-9 rounded-lg border border-threads-gray-light bg-threads-gray-dark p-1 placeholder:text-threads-gray-light"
+                ></textarea>
+              </div>
+
+              {/* Url */}
+              <div className="mt-5 flex flex-col border-threads-gray-light pb-5 text-white">
+                <label htmlFor="url" className="mb-1 font-bold">
+                  Lien
+                </label>
+                <input
+                  type="url"
+                  id="url"
+                  name="url"
+                  placeholder="+ Ajouter un lien"
+                  value={linkInput}
+                  onChange={(e) => setLinkInput(e.target.value)}
+                  className="rounded-lg border border-threads-gray-light bg-threads-gray-dark p-1 placeholder:text-threads-gray-light"
+                />
+              </div>
+              <div>
+                <button
+                  onClick={editUser}
+                  disabled={isLoading}
+                  className="mt-5 h-14 w-full rounded-lg bg-white"
+                >
+                  Terminé
+                </button>
+              </div>
+            </div>
+          </div>,
+          document.body,
+        )}
       <div>
         <div className="mx-auto p-5 text-white md:max-w-[700px] md:px-0">
           <div className="mb-3 flex justify-between">
@@ -75,7 +180,18 @@ export default function Profil() {
               </a>
             </div>
           )}
+
+          {/* Updating */}
+          {session?.user?.pseudo === pseudo && (
+            <div
+              onClick={edit}
+              className="mt-6 cursor-pointer rounded-xl border border-threads-gray-light py-2 text-center text-white"
+            >
+              Modifier le profil
+            </div>
+          )}
         </div>
+
         {/* Tabs */}
         <div className="mx-auto flex md:max-w-[700px] md:px-0">
           <div className="flex-1 cursor-pointer border-b border-white pb-2 text-center text-white">

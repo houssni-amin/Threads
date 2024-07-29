@@ -34,6 +34,14 @@
   @apply size-full w-20 rounded-e-xl bg-threads-gray-dark font-semibold text-white disabled:opacity-50;
 }
 
+.modale-background {
+  @apply fixed bottom-0 left-0 right-0 top-0 z-30 flex items-center justify-center bg-black bg-opacity-60;
+}
+
+.modale-foreground {
+  @apply mx-2 w-full rounded-xl border border-threads-gray-light bg-threads-gray-dark p-5 shadow lg:w-[600px];
+}
+
 /* for the Header */
 .backdrop-blur-custom {
   backdrop-filter: blur(100px);
