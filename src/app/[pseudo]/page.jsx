@@ -70,7 +70,44 @@ export default function Profil() {
     setOpenModale(true)
   }
 
-  const editUser = async () => {}
+  const editUser = async () => {
+    if (isLoading) return
+
+    setIsLoading(true)
+
+    const response = await fetch("api/user/edit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        pseudo,
+        profile: profileInput,
+        bio: bioInput,
+        url: linkInput,
+      }),
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      setIsLoading(false)
+      toast.error("Une erreur est survenue")
+      return
+    }
+
+    const newUser = {
+      ...user,
+      profile: profileInput,
+      bio: bioInput,
+      url: linkInput,
+    }
+
+    setUser(newUser)
+
+    setOpenModale(false)
+    setIsLoading(false)
+
+    toast.success("Profil mis à jour")
+  }
 
   const profilImage = user.profile || "/picture.png"
 
@@ -109,6 +146,7 @@ export default function Profil() {
                   width={80}
                   height={80}
                   className="rounded-full object-cover"
+                  unoptimized
                 />
               </div>
 
@@ -120,7 +158,7 @@ export default function Profil() {
                 <textarea
                   name="bio"
                   id="bio"
-                  placeholder="+ Ecrivez une bio"
+                  placeholder="+ Écrire une bio"
                   value={bioInput}
                   onChange={(e) => setBioInput(e.target.value)}
                   className="h-9 max-h-72 min-h-9 rounded-lg border border-threads-gray-light bg-threads-gray-dark p-1 placeholder:text-threads-gray-light"
@@ -169,6 +207,7 @@ export default function Profil() {
                 width={75}
                 height={75}
                 className="min-h-[75px] min-w-[75px] rounded-full object-cover"
+                unoptimized
               />
             </div>
           </div>

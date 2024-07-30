@@ -48,7 +48,7 @@ export const createUser = async (username, pseudo, email, password) => {
       email,
       password: encryptedPassword,
       profile: "/picture.png",
-      bio: "",
+      bio: "_",
       url: "",
       creation: new Date(),
     })
