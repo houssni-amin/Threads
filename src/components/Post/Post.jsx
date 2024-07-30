@@ -14,6 +14,8 @@ export default function Post({ post }) {
 
   const [optionsAreOpen, setOptionsAreOpen] = useState(false)
 
+  const profilImage = post.profile || "/picture.png"
+
   const onDeletePost = async () => {
     if (!confirm("Voulez-vous vraiment supprimer ce thread ?")) return
 
@@ -32,11 +34,12 @@ export default function Post({ post }) {
       <Link href={`/@${post.pseudo}`}>
         <div className="mr-5">
           <Image
-            src={post.profile}
+            src={profilImage}
             alt="Profile picture"
             width={50}
             height={50}
             className="min-h-[50px] min-w-[50px] rounded-full object-cover"
+            unoptimized
           />
         </div>
       </Link>

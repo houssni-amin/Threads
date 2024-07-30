@@ -34,7 +34,8 @@ export default function NewPostFormModal({ closeModale = () => {} }) {
             alt="User"
             width={50}
             height={50}
-            className="size-full rounded-full"
+            className="size-full rounded-full object-cover"
+            unoptimized
           />
         </div>
         <div className="text-lg font-semibold text-white">@{pseudo}</div>
