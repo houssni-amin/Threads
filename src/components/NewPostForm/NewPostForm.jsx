@@ -29,17 +29,19 @@ export default function NewPostForm({ closeModale = () => {} }) {
       className="mx-auto flex border-b border-threads-gray-light p-5 md:max-w-[700px] md:px-0"
     >
       <div className="flex size-full">
-        <div className="mr-5 max-h-[50px] min-h-[50px] min-w-[50px] max-w-[50px]">
-          <Image
-            src={profilImage}
-            alt="User"
-            width={50}
-            height={50}
-            className="size-full rounded-full object-cover"
-            unoptimized
-          />
+        <div className="flex items-center">
+          <div className="mr-5 h-[60px] w-[60px] overflow-hidden rounded-full">
+            <Image
+              src={profilImage}
+              alt="User"
+              width={60}
+              height={60}
+              unoptimized
+              className="size-full object-cover"
+            />
+          </div>
         </div>
-        <div className="flex w-full">
+        <div className="flex flex-1">
           <textarea
             placeholder="Commencer un thread..."
             id="content"

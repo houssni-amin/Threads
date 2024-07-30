@@ -32,14 +32,14 @@ export default function Post({ post }) {
     <div className="post">
       {/* Photo */}
       <Link href={`/@${post.pseudo}`}>
-        <div className="mr-5">
+        <div className="mr-5 h-[60px] w-[60px] overflow-hidden rounded-full">
           <Image
             src={profilImage}
             alt="Profile picture"
-            width={50}
-            height={50}
-            className="min-h-[50px] min-w-[50px] rounded-full object-cover"
+            width={60}
+            height={60}
             unoptimized
+            className="size-full object-cover"
           />
         </div>
       </Link>

@@ -140,14 +140,17 @@ export default function Profil() {
                     onChange={(e) => setProfileInput(e.target.value)}
                   />
                 </div>
-                <Image
-                  src={user.profile}
-                  alt="User"
-                  width={80}
-                  height={80}
-                  className="rounded-full object-cover"
-                  unoptimized
-                />
+
+                <div className="h-[100px] w-[100px] overflow-hidden rounded-full">
+                  <Image
+                    src={user.profile}
+                    alt="User"
+                    width={100}
+                    height={100}
+                    className="size-full object-cover"
+                    unoptimized
+                  />
+                </div>
               </div>
 
               {/* Bio */}
@@ -200,14 +203,15 @@ export default function Profil() {
               <h1 className="text-2xl font-bold">{user.username}</h1>
               <div>@{pseudo}</div>
             </div>
-            <div className="size-[75px]">
+
+            <div className="h-[100px] w-[100px] overflow-hidden rounded-full">
               <Image
                 src={profilImage}
                 alt="Profile picture"
-                width={75}
-                height={75}
-                className="min-h-[75px] min-w-[75px] rounded-full object-cover"
+                width={100}
+                height={100}
                 unoptimized
+                className="size-full object-cover"
               />
             </div>
           </div>

@@ -28,17 +28,19 @@ export default function NewPostFormModal({ closeModale = () => {} }) {
   return (
     <form action={onPrepare} className="mx-auto p-4 md:max-w-[700px] md:px-0">
       <div className="mb-5 flex">
-        <div className="mr-3 flex max-h-[50px] min-h-[50px] min-w-[50px] max-w-[50px]">
+        <div className="mr-3 h-[60px] w-[60px] overflow-hidden rounded-full">
           <Image
             src={profilImage}
             alt="User"
-            width={50}
-            height={50}
-            className="size-full rounded-full object-cover"
+            width={60}
+            height={60}
+            className="size-full object-cover"
             unoptimized
           />
         </div>
-        <div className="text-lg font-semibold text-white">@{pseudo}</div>
+        <div className="flex items-center text-lg font-semibold text-white">
+          @{pseudo}
+        </div>
       </div>
       <div className="flex size-full">
         <div className="flex w-full">
